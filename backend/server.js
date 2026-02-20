@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -17,6 +18,16 @@ const productRoutes = require('./routes/productRoutes');
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.send('Apex Inventory API is running...');
+    });
+}
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)
