@@ -1,5 +1,7 @@
 # Apex Inventory System
 
+**🚀 [Live Demo: Access the System Here](https://apex-inventory-system.onrender.com)**
+
 **A premium inventory management and Point of Sale (POS) application for small shops built with the MERN stack.**  
 It features real-time dashboards, role-based access control, and secure authentication flows.
 
