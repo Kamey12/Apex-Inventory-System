@@ -29,13 +29,32 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-// Database Connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.log("❌ Connection Error:", err));
-
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+mongoose.connect(process.env.MONGO_URI)
+    .then(async () => {
+        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+        try {
+            const User = require('./models/User'); 
+            const adminExists = await User.findOne({ role: 'admin' });
+            
+            if (!adminExists) {
+                const bcrypt = require('bcryptjs');
+                const salt = await bcrypt.genSalt(10);
+                const hashedPassword = await bcrypt.hash('admin123', salt);
+                
+                await User.create({
+                    username: 'admin',
+                    password: hashedPassword,
+                    role: 'admin'
+                });
+                console.log('🌱 Database Seeded: Master admin account created.');
+            }
+        } catch (seedError) {
+            console.error('Failed to seed database:', seedError);
+        }
+    })
+    .catch(err => console.log(err));
 
 app.get('/', (req, res) => {
     res.send("Inventory System API is running...");
