@@ -1,6 +1,7 @@
 # Apex Inventory System
 
 **🚀 [Live Demo: Access the System Here](https://apex-inventory-system.onrender.com)**
+*** credentials provided down below ***
 
 **A premium inventory management and Point of Sale (POS) application for small shops built with the MERN stack.**  
 It features real-time dashboards, role-based access control, and secure authentication flows.
@@ -132,6 +133,18 @@ apex-inventory-system/
 - **Atomic Transactions:** POS sales validate stock before deduction to maintain data integrity.
 
 ---
+
+## 🔐 Live Demo Access
+
+To explore the live application and test the Role-Based Access Control (RBAC), you can use the following read-only demo accounts:
+
+**Admin Role (Access to Financials, Dashboard, & User Management)**
+* **Username:** `admin_demo`
+* **Password:** `demo123`
+
+**Staff Role (Access to POS Terminal & Read-Only Inventory)**
+* **Username:** `staff_demo`
+* **Password:** `demo123`
 
 ## 💡 License
 MIT © [Abdul Karim Hasan](https://github.com/Kamey12)
